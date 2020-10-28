@@ -7,7 +7,9 @@ import javax.persistence.Id;
 import java.util.Objects;
 
 /**
- * Mapeando Cozinha
+ * Mapping The kitchen
+ *
+ * @author manuelernest0
  */
 
 @Entity
