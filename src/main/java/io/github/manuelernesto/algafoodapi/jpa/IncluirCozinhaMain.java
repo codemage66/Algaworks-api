@@ -21,11 +21,11 @@ public class IncluirCozinhaMain {
         cozinha2.setNome("Japonesa");
 
 
-        var cozinhaSalva1 = cadastroCozinha.adicionar(cozinha1);
-        var cozinhaSalva2 = cadastroCozinha.adicionar(cozinha2);
+        cozinha1 = cadastroCozinha.adicionar(cozinha1);
+        cozinha2 = cadastroCozinha.adicionar(cozinha2);
 
-        System.out.println("Cozinha Salva1: " + cozinhaSalva1.getNome());
-        System.out.println("Cozinha Salva2: " + cozinhaSalva2.getNome());
+        System.out.println("Cozinha Salva1: " + cozinha1.getNome());
+        System.out.println("Cozinha Salva2: " + cozinha2.getNome());
 
     }
 }
