@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Component
@@ -18,6 +17,10 @@ public class CadastroCozinha {
     public List<Cozinha> listar() {
         return manager.createQuery("FROM Cozinha", Cozinha.class)
                 .getResultList();
+    }
+
+    public Cozinha porId(Long id) {
+        return manager.find(Cozinha.class, id);
     }
 
     @Transactional
