@@ -1,14 +1,11 @@
 package io.github.manuelernesto.algafoodapi.domain.model;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Objects;
 
 /**
  * Mapping The kitchen
@@ -16,9 +13,7 @@ import java.util.Objects;
  * @author manuelernest0
  */
 
-@Getter
-@Setter
-@EqualsAndHashCode
+@Data
 @Entity
 public class Cozinha {
     @Id

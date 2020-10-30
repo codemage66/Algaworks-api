@@ -1,16 +1,12 @@
 package io.github.manuelernesto.algafoodapi.domain.model;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 
-@Getter
-@Setter
-@EqualsAndHashCode
+@Data
 @Entity
 public class Restaurante {
     @Id
