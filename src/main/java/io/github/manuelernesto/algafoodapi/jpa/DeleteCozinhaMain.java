@@ -2,6 +2,7 @@ package io.github.manuelernesto.algafoodapi.jpa;
 
 import io.github.manuelernesto.algafoodapi.AlgafoodApiApplication;
 import io.github.manuelernesto.algafoodapi.domain.model.Cozinha;
+import io.github.manuelernesto.algafoodapi.domain.repository.CozinhaRepository;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
@@ -13,11 +14,11 @@ public class DeleteCozinhaMain {
                         .web(WebApplicationType.NONE)
                         .run(args);
 
-        var cadastroCozinha = context.getBean(CadastroCozinha.class);
+        var repository = context.getBean(CozinhaRepository.class);
 
         var cozinha = new Cozinha();
         cozinha.setId(1L);
-        cadastroCozinha.delete(cozinha);
+        repository.remove(cozinha);
     }
 }
 

@@ -2,6 +2,7 @@ package io.github.manuelernesto.algafoodapi.jpa;
 
 import io.github.manuelernesto.algafoodapi.AlgafoodApiApplication;
 import io.github.manuelernesto.algafoodapi.domain.model.Cozinha;
+import io.github.manuelernesto.algafoodapi.domain.repository.CozinhaRepository;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
@@ -13,7 +14,7 @@ public class IncluirCozinhaMain {
                         .web(WebApplicationType.NONE)
                         .run(args);
 
-        var cadastroCozinha = context.getBean(CadastroCozinha.class);
+        var repository = context.getBean(CozinhaRepository.class);
 
         var cozinha1 = new Cozinha();
         var cozinha2 = new Cozinha();
@@ -21,8 +22,8 @@ public class IncluirCozinhaMain {
         cozinha2.setNome("Japonesa");
 
 
-        cozinha1 = cadastroCozinha.save(cozinha1);
-        cozinha2 = cadastroCozinha.save(cozinha2);
+        cozinha1 = repository.save(cozinha1);
+        cozinha2 = repository.save(cozinha2);
 
         System.out.println("Cozinha Salva1: " + cozinha1.getNome());
         System.out.println("Cozinha Salva2: " + cozinha2.getNome());

@@ -1,6 +1,7 @@
 package io.github.manuelernesto.algafoodapi.jpa;
 
 import io.github.manuelernesto.algafoodapi.AlgafoodApiApplication;
+import io.github.manuelernesto.algafoodapi.domain.repository.CozinhaRepository;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
@@ -12,9 +13,9 @@ public class BuscaCozinhaMain {
                         .web(WebApplicationType.NONE)
                         .run(args);
 
-        var cadastroCozinha = context.getBean(CadastroCozinha.class);
+        var repository = context.getBean(CozinhaRepository.class);
 
-        var cozinha = cadastroCozinha.findByID(2L);
+        var cozinha = repository.findByID(2L);
 
         System.out.println(cozinha.getNome());
 
