@@ -22,8 +22,8 @@ public class IncluirCozinhaMain {
         cozinha2.setNome("Japonesa");
 
 
-        cozinha1 = repository.save(cozinha1);
-        cozinha2 = repository.save(cozinha2);
+        cozinha1 = repository.add(cozinha1);
+        cozinha2 = repository.add(cozinha2);
 
         System.out.println("Cozinha Salva1: " + cozinha1.getNome());
         System.out.println("Cozinha Salva2: " + cozinha2.getNome());

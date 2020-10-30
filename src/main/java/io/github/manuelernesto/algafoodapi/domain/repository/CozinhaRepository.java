@@ -9,7 +9,7 @@ public interface CozinhaRepository {
 
     Cozinha findByID(Long id);
 
-    Cozinha save(Cozinha cozinha);
+    Cozinha add(Cozinha cozinha);
 
     void remove(Cozinha cozinha);
 }

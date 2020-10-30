@@ -18,7 +18,7 @@ public class AlterarCozinhaMain {
         var cozinha = repository.findByID(1L);
         cozinha.setNome("Dadox");
 
-        cozinha = repository.save(cozinha);
+        cozinha = repository.add(cozinha);
 
         var toPrint = String.format("Cozinha: %s - %s", cozinha.getId(), cozinha.getNome());
         System.out.println(toPrint);
