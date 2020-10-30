@@ -14,7 +14,7 @@ public class BuscaCozinhaMain {
 
         var cadastroCozinha = context.getBean(CadastroCozinha.class);
 
-        var cozinha = cadastroCozinha.porId(2L);
+        var cozinha = cadastroCozinha.findByID(2L);
 
         System.out.println(cozinha.getNome());
 

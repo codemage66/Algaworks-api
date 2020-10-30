@@ -14,18 +14,24 @@ public class CadastroCozinha {
     @PersistenceContext
     private EntityManager manager;
 
-    public List<Cozinha> listar() {
+    public List<Cozinha> getAll() {
         return manager.createQuery("FROM Cozinha", Cozinha.class)
                 .getResultList();
     }
 
-    public Cozinha porId(Long id) {
+    public Cozinha findByID(Long id) {
         return manager.find(Cozinha.class, id);
     }
 
     @Transactional
-    public Cozinha adicionar(Cozinha cozinha) {
+    public Cozinha save(Cozinha cozinha) {
         return manager.merge(cozinha);
+    }
+
+    @Transactional
+    public void delete(Cozinha cozinha) {
+        cozinha = findByID(cozinha.getId());
+        manager.remove(cozinha);
     }
 
 }
