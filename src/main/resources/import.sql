@@ -7,3 +7,5 @@ insert into restaurante(nome, taxa_frete,cozinha_id) VALUES ('Tuk Tuk Comida Ind
 
 insert into forma_pagamento(descricao) values ('TPA');
 insert into forma_pagamento(descricao) values ('Transferencia');
+
+insert into permissao(nome,descricao) values ('Admin','Administracao');
