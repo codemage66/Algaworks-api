@@ -1,5 +1,6 @@
 package io.github.manuelernesto.algafoodapi.api.controller;
 
+import io.github.manuelernesto.algafoodapi.api.model.CozinhasXMLWrapper;
 import io.github.manuelernesto.algafoodapi.domain.model.Cozinha;
 import io.github.manuelernesto.algafoodapi.domain.repository.CozinhaRepository;
 import org.springframework.data.repository.query.Param;
@@ -21,6 +22,11 @@ public class CozinhaController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Cozinha> list() {
         return repository.findAll();
+    }
+
+    @GetMapping(produces = MediaType.APPLICATION_XML_VALUE)
+    public CozinhasXMLWrapper listXML() {
+        return new CozinhasXMLWrapper(repository.findAll());
     }
 
     @GetMapping("/{id}")
