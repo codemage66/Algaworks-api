@@ -3,11 +3,12 @@ package io.github.manuelernesto.algafoodapi.api.controller;
 import io.github.manuelernesto.algafoodapi.api.model.CozinhasXMLWrapper;
 import io.github.manuelernesto.algafoodapi.domain.model.Cozinha;
 import io.github.manuelernesto.algafoodapi.domain.repository.CozinhaRepository;
-import org.springframework.data.repository.query.Param;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
