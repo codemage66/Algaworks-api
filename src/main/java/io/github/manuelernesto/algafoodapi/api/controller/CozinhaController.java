@@ -57,6 +57,17 @@ public class CozinhaController {
 
         return ResponseEntity.notFound().build();
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Cozinha> delete(@PathVariable Long id) {
+        var cozinha = repository.findByID(id);
+        if (cozinha != null) {
+            repository.remove(cozinha);
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
 }
 
 
