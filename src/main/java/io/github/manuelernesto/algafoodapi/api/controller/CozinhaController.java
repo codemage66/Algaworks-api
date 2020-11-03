@@ -3,6 +3,7 @@ package io.github.manuelernesto.algafoodapi.api.controller;
 import io.github.manuelernesto.algafoodapi.api.model.CozinhasXMLWrapper;
 import io.github.manuelernesto.algafoodapi.domain.model.Cozinha;
 import io.github.manuelernesto.algafoodapi.domain.repository.CozinhaRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,8 +40,9 @@ public class CozinhaController {
     }
 
     @PostMapping
-    public void save(@RequestBody Cozinha cozinha) {
-        repository.add(cozinha);
+    @ResponseStatus(HttpStatus.CREATED)
+    public Cozinha save(@RequestBody Cozinha cozinha) {
+        return repository.add(cozinha);
     }
 }
 
