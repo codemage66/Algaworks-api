@@ -1,12 +1,12 @@
 package io.github.manuelernesto.algafoodapi.api.controller;
 
+import io.github.manuelernesto.algafoodapi.domain.exception.EntityNotFoundException;
 import io.github.manuelernesto.algafoodapi.domain.model.Restaurante;
 import io.github.manuelernesto.algafoodapi.domain.repository.RestauranteRepository;
+import io.github.manuelernesto.algafoodapi.domain.services.CadastroRestauranteService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,9 +15,21 @@ import java.util.List;
 public class RestauranteController {
 
     private final RestauranteRepository restauranteRepository;
+    private final CadastroRestauranteService cadastroRestauranteService;
 
-    public RestauranteController(RestauranteRepository restauranteRepository) {
+    public RestauranteController(RestauranteRepository restauranteRepository, CadastroRestauranteService cadastroRestauranteService) {
         this.restauranteRepository = restauranteRepository;
+        this.cadastroRestauranteService = cadastroRestauranteService;
+    }
+
+    @PostMapping
+    public ResponseEntity<Restaurante> save(@RequestBody Restaurante restaurante) {
+        try {
+            restaurante = cadastroRestauranteService.save(restaurante);
+            return ResponseEntity.status(HttpStatus.CREATED).body(restaurante);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @GetMapping
