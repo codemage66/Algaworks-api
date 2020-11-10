@@ -1,6 +1,8 @@
 package io.github.manuelernesto.algafoodapi.api.controller;
 
 import io.github.manuelernesto.algafoodapi.api.model.CozinhasXMLWrapper;
+import io.github.manuelernesto.algafoodapi.domain.exception.EntityInUseException;
+import io.github.manuelernesto.algafoodapi.domain.exception.EntityNotFoundException;
 import io.github.manuelernesto.algafoodapi.domain.model.Cozinha;
 import io.github.manuelernesto.algafoodapi.domain.repository.CozinhaRepository;
 import io.github.manuelernesto.algafoodapi.domain.services.CadastroCozinhaService;
@@ -18,11 +20,11 @@ import java.util.List;
 public class CozinhaController {
 
     private final CozinhaRepository cozinhaRepository;
-    private final CadastroCozinhaService service;
+    private final CadastroCozinhaService cozinhaService;
 
-    public CozinhaController(CozinhaRepository repository, CadastroCozinhaService service) {
-        this.cozinhaRepository = repository;
-        this.service = service;
+    public CozinhaController(CozinhaRepository cozinhaRepository, CadastroCozinhaService cozinhaService) {
+        this.cozinhaRepository = cozinhaRepository;
+        this.cozinhaService = cozinhaService;
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -47,7 +49,7 @@ public class CozinhaController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Cozinha save(@RequestBody Cozinha cozinha) {
-        return service.save(cozinha);
+        return cozinhaService.save(cozinha);
     }
 
     @PutMapping("/{id}")
@@ -65,14 +67,12 @@ public class CozinhaController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Cozinha> delete(@PathVariable Long id) {
         try {
-            var cozinha = cozinhaRepository.findByID(id);
-            if (cozinha != null) {
-                cozinhaRepository.remove(cozinha);
-                return ResponseEntity.noContent().build();
-            }
-            return ResponseEntity.notFound().build();
-        } catch (DataIntegrityViolationException e) {
+            cozinhaService.remove(id);
+            return ResponseEntity.noContent().build();
+        } catch (EntityInUseException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 
