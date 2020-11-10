@@ -23,12 +23,13 @@ public class RestauranteController {
     }
 
     @PostMapping
-    public ResponseEntity<Restaurante> save(@RequestBody Restaurante restaurante) {
+    public ResponseEntity<?> save(@RequestBody Restaurante restaurante) {
         try {
             restaurante = cadastroRestauranteService.save(restaurante);
             return ResponseEntity.status(HttpStatus.CREATED).body(restaurante);
         } catch (EntityNotFoundException e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest()
+                    .body(e.getMessage());
         }
     }
 
