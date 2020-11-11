@@ -2,9 +2,10 @@ package io.github.manuelernesto.algafoodapi.api.controller;
 
 import io.github.manuelernesto.algafoodapi.domain.model.Estado;
 import io.github.manuelernesto.algafoodapi.domain.repository.EstadoRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import io.github.manuelernesto.algafoodapi.domain.services.CadastroEstadoService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -12,14 +13,22 @@ import java.util.List;
 @RequestMapping("/estados")
 public class EstadoController {
 
-    private final EstadoRepository repository;
+    private final EstadoRepository estadoRepository;
+    private final CadastroEstadoService cadastroEstadoService;
 
-    public EstadoController(EstadoRepository repository) {
-        this.repository = repository;
+    public EstadoController(EstadoRepository estadoRepository, CadastroEstadoService cadastroEstadoService) {
+        this.estadoRepository = estadoRepository;
+        this.cadastroEstadoService = cadastroEstadoService;
     }
 
     @GetMapping
     public List<Estado> list() {
-        return repository.findAll();
+        return estadoRepository.findAll();
+    }
+
+    @PostMapping
+    public ResponseEntity<Estado> save(@RequestBody Estado estado) {
+        estado = cadastroEstadoService.save(estado);
+        return ResponseEntity.status(HttpStatus.CREATED).body(estado);
     }
 }

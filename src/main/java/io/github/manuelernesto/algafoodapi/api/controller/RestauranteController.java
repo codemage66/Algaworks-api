@@ -1,7 +1,6 @@
 package io.github.manuelernesto.algafoodapi.api.controller;
 
 import io.github.manuelernesto.algafoodapi.domain.exception.EntityNotFoundException;
-import io.github.manuelernesto.algafoodapi.domain.model.Cozinha;
 import io.github.manuelernesto.algafoodapi.domain.model.Restaurante;
 import io.github.manuelernesto.algafoodapi.domain.repository.RestauranteRepository;
 import io.github.manuelernesto.algafoodapi.domain.services.CadastroRestauranteService;
