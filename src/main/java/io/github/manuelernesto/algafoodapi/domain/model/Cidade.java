@@ -19,3 +19,5 @@ public class Cidade {
     @ManyToOne
     private Estado estado;
 }
+
+
