@@ -1,0 +1,32 @@
+### Restaurantes
+### Save
+POST http://localhost:8080/restaurantes
+Content-Type: application/json
+
+{
+  "nome": "Nandinhos",
+  "taxaFrete": 50,
+  "cozinha": {
+    "id": 2
+  }
+}
+
+### getByID
+GET http://localhost:8080/restaurantes/1
+Accept: application/json
+
+
+### getAll
+GET http://localhost:8080/restaurantes
+Accept: application/json
+
+### update single field
+PATCH http://localhost:8080/restaurantes/1
+Content-Type: application/json
+
+{
+  "nome": "Nandinhos",
+  "cozinha": {
+    "id": 2
+  }
+}

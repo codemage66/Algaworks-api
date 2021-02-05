@@ -1,5 +1,6 @@
 package io.github.manuelernesto.algafoodapi.api.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.manuelernesto.algafoodapi.domain.exception.EntityNotFoundException;
 import io.github.manuelernesto.algafoodapi.domain.model.Restaurante;
 import io.github.manuelernesto.algafoodapi.domain.repository.RestauranteRepository;
@@ -7,9 +8,12 @@ import io.github.manuelernesto.algafoodapi.domain.services.CadastroRestauranteSe
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/restaurantes")
@@ -61,5 +65,30 @@ public class RestauranteController {
             return ResponseEntity.ok(restaurante);
 
         return ResponseEntity.notFound().build();
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<?> updatePartial(@PathVariable Long id, @RequestBody Map<String, Object> fields) {
+        var restauranteAtual = restauranteRepository.findByID(id);
+
+        if (restauranteAtual == null) return ResponseEntity.notFound().build();
+
+        merge(fields, restauranteAtual);
+
+        return update(id, restauranteAtual);
+
+    }
+
+    private void merge(Map<String, Object> fields, Restaurante restauranteDestino) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        Restaurante restauranteOrigem = objectMapper.convertValue(fields, Restaurante.class);
+
+        fields.forEach((key, value) -> {
+            Field field = ReflectionUtils.findField(Restaurante.class, key);
+            assert field != null;
+            field.setAccessible(true);
+            Object novoValor = ReflectionUtils.getField(field, restauranteOrigem);
+            ReflectionUtils.setField(field, restauranteDestino, novoValor);
+        });
     }
 }
