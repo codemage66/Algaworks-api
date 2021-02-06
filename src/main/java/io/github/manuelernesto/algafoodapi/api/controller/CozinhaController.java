@@ -39,11 +39,14 @@ public class CozinhaController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Cozinha> find(@PathVariable Long id) {
-        var cozinha = cozinhaRepository.findByID(id);
-        if (cozinha != null)
-            return ResponseEntity.ok(cozinha);
+        var cozinha = cozinhaRepository.findById(id);
+        return cozinha.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
 
-        return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/por-nome")
+    public List<Cozinha> findByName(@RequestParam("name") String name) {
+        return cozinhaRepository.findByNome(name);
     }
 
     @PostMapping
@@ -54,11 +57,11 @@ public class CozinhaController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Cozinha> update(@PathVariable Long id, @RequestBody Cozinha cozinha) {
-        var cozinhaActual = cozinhaRepository.findByID(id);
-        if (cozinhaActual != null) {
-            BeanUtils.copyProperties(cozinha, cozinhaActual, "id");
-            cozinhaActual = cozinhaService.save(cozinhaActual);
-            return ResponseEntity.ok(cozinhaActual);
+        var cozinhaActual = cozinhaRepository.findById(id);
+        if (cozinhaActual.isPresent()) {
+            BeanUtils.copyProperties(cozinha, cozinhaActual.get(), "id");
+            var cozinhaSalva = cozinhaService.save(cozinhaActual.get());
+            return ResponseEntity.ok(cozinhaSalva);
         }
 
         return ResponseEntity.notFound().build();

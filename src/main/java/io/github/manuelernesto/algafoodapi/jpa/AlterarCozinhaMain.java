@@ -15,13 +15,13 @@ public class AlterarCozinhaMain {
 
         var repository = context.getBean(CozinhaRepository.class);
 
-        var cozinha = repository.findByID(1L);
-        cozinha.setNome("Dadox");
+       // var cozinha = repository.findByID(1L);
+        //cozinha.setNome("Dadox");
 
-        cozinha = repository.add(cozinha);
+       // cozinha = repository.add(cozinha);
 
-        var toPrint = String.format("Cozinha: %s - %s", cozinha.getId(), cozinha.getNome());
-        System.out.println(toPrint);
+      // var toPrint = String.format("Cozinha: %s - %s", cozinha.getId(), cozinha.getNome());
+      //  System.out.println(toPrint);
 
     }
 }

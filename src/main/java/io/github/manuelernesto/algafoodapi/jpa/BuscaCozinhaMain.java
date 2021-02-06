@@ -15,9 +15,9 @@ public class BuscaCozinhaMain {
 
         var repository = context.getBean(CozinhaRepository.class);
 
-        var cozinha = repository.findByID(2L);
+        //var cozinha = repository.findByID(2L);
 
-        System.out.println(cozinha.getNome());
+        // System.out.println(cozinha.getNome());
 
 
     }

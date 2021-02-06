@@ -30,3 +30,14 @@ Content-Type: application/json
     "id": 2
   }
 }
+
+
+### Cozinhas
+### getByName
+GET http://localhost:8080/cozinhas/por-nome?name=Indiana
+Accept: application/json
+
+
+### getByID
+GET http://localhost:8080/cozinhas/10
+Accept: application/json

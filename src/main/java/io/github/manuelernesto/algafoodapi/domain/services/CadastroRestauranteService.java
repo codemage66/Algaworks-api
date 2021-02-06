@@ -18,10 +18,10 @@ public class CadastroRestauranteService {
 
     public Restaurante save(Restaurante restaurante) {
         var cozinhaId = restaurante.getCozinha().getId();
-        var cozinha = cozinhaRepository.findByID(cozinhaId);
-        if (cozinha == null)
-            throw new EntityNotFoundException(String.format
-                    ("Cozinha de código %d não encontrado", cozinhaId));
+        var cozinha = cozinhaRepository.findById(cozinhaId)
+                .orElseThrow(() -> new EntityNotFoundException(String.format
+                        ("Cozinha de código %d não encontrado", cozinhaId))
+                );
 
         restaurante.setCozinha(cozinha);
 

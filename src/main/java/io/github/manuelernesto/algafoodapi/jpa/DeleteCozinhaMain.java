@@ -18,7 +18,7 @@ public class DeleteCozinhaMain {
 
         var cozinha = new Cozinha();
         cozinha.setId(1L);
-        repository.remove(1L);
+       // repository.remove(1L);
     }
 }
 
