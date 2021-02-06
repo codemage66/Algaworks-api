@@ -34,7 +34,7 @@ Content-Type: application/json
 
 ### Cozinhas
 ### getByName
-GET http://localhost:8080/cozinhas/por-nome?name=Indiana
+GET http://localhost:8080/cozinhas/por-nome?name=sa
 Accept: application/json
 
 

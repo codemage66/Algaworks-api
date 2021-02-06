@@ -46,7 +46,7 @@ public class CozinhaController {
 
     @GetMapping("/por-nome")
     public List<Cozinha> findByName(@RequestParam("name") String name) {
-        return cozinhaRepository.findByNome(name);
+        return cozinhaRepository.findByNomeContaining(name);
     }
 
     @PostMapping
