@@ -1,16 +1,9 @@
 package io.github.manuelernesto.algafoodapi.domain.repository;
 
-import io.github.manuelernesto.algafoodapi.domain.model.Cozinha;
 import io.github.manuelernesto.algafoodapi.domain.model.Restaurante;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-public interface RestauranteRepository {
-    List<Restaurante> findAll();
-
-    Restaurante findByID(Long id);
-
-    Restaurante add(Restaurante restaurante);
-
-    void remove(Restaurante restaurante);
+@Repository
+public interface RestauranteRepository extends JpaRepository<Restaurante, Long> {
 }

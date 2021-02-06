@@ -25,6 +25,6 @@ public class CadastroRestauranteService {
 
         restaurante.setCozinha(cozinha);
 
-        return restauranteRepository.add(restaurante);
+        return restauranteRepository.save(restaurante);
     }
 }

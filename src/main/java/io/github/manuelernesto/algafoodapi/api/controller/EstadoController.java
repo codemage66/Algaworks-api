@@ -35,20 +35,20 @@ public class EstadoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Estado> find(@PathVariable Long id) {
-        var estado = estadoRepository.findByID(id);
-        if (estado != null)
-            return ResponseEntity.ok(estado);
+        var estado = estadoRepository.findById(id);
+        if (estado.isPresent())
+            return ResponseEntity.ok(estado.get());
 
         return ResponseEntity.notFound().build();
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Estado estado) {
-        var estadoAtual = estadoRepository.findByID(id);
-        if (estadoAtual != null) {
-            BeanUtils.copyProperties(estado, estadoAtual, "id");
-            estadoAtual = cadastroEstadoService.save(estadoAtual);
-            return ResponseEntity.ok(estadoAtual);
+        var estadoAtual = estadoRepository.findById(id);
+        if (estadoAtual.isPresent()) {
+            BeanUtils.copyProperties(estado, estadoAtual.get(), "id");
+            var estadoSalvo = cadastroEstadoService.save(estadoAtual.get());
+            return ResponseEntity.ok(estadoSalvo);
         }
         return ResponseEntity.notFound().build();
     }

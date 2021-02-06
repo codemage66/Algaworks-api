@@ -40,12 +40,12 @@ public class RestauranteController {
 
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Restaurante restaurante) {
-        var restauranteAtual = restauranteRepository.findByID(id);
-        if (restauranteAtual != null)
+        var restauranteAtual = restauranteRepository.findById(id);
+        if (restauranteAtual.isPresent())
             try {
-                BeanUtils.copyProperties(restaurante, restauranteAtual, "id");
-                restauranteAtual = cadastroRestauranteService.save(restaurante);
-                return ResponseEntity.ok(restauranteAtual);
+                BeanUtils.copyProperties(restaurante, restauranteAtual.get(), "id");
+                var restauranteSalvo = cadastroRestauranteService.save(restauranteAtual.get());
+                return ResponseEntity.ok(restauranteSalvo);
             } catch (EntityNotFoundException e) {
                 return ResponseEntity.badRequest()
                         .body(e.getMessage());
@@ -60,22 +60,22 @@ public class RestauranteController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Restaurante> find(@PathVariable Long id) {
-        var restaurante = restauranteRepository.findByID(id);
-        if (restaurante != null)
-            return ResponseEntity.ok(restaurante);
+        var restaurante = restauranteRepository.findById(id);
+        if (restaurante.isPresent())
+            return ResponseEntity.ok(restaurante.get());
 
         return ResponseEntity.notFound().build();
     }
 
     @PatchMapping("/{id}")
     public ResponseEntity<?> updatePartial(@PathVariable Long id, @RequestBody Map<String, Object> fields) {
-        var restauranteAtual = restauranteRepository.findByID(id);
+        var restauranteAtual = restauranteRepository.findById(id);
 
-        if (restauranteAtual == null) return ResponseEntity.notFound().build();
+        if (restauranteAtual.isPresent()) return ResponseEntity.notFound().build();
 
-        merge(fields, restauranteAtual);
+        merge(fields, restauranteAtual.get());
 
-        return update(id, restauranteAtual);
+        return update(id, restauranteAtual.get());
 
     }
 
