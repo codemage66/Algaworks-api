@@ -2,6 +2,8 @@ package io.github.manuelernesto.algafoodapi.domain.repository;
 
 import io.github.manuelernesto.algafoodapi.domain.model.Restaurante;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
@@ -19,4 +21,7 @@ public interface RestauranteRepository extends JpaRepository<Restaurante, Long> 
     List<Restaurante> findTop2ByNomeContaining(String nome);
 
     int countByCozinhaId(Long cozinha);
+
+    @Query("from Restaurante where nome like %:nome% and cozinha.id = :id")
+    List<Restaurante> consultarPorNome(String nome, @Param("id") Long cozinha);
 }
