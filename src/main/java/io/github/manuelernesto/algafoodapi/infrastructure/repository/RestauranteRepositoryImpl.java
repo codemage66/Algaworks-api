@@ -1,4 +1,4 @@
-package io.github.manuelernesto.algafoodapi.api.infrastructure.repository;
+package io.github.manuelernesto.algafoodapi.infrastructure.repository;
 
 import io.github.manuelernesto.algafoodapi.domain.model.Restaurante;
 import io.github.manuelernesto.algafoodapi.domain.repository.RestauranteRepositoryQueries;
@@ -8,14 +8,10 @@ import org.springframework.util.StringUtils;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public class RestauranteRepositoryImpl implements RestauranteRepositoryQueries {
