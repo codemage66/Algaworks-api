@@ -16,5 +16,6 @@ public class FormaPagamento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Long id;
+
     private String descricao;
 }
