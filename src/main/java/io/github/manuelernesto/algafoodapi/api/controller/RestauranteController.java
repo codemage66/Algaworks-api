@@ -43,7 +43,7 @@ public class RestauranteController {
         var restauranteAtual = restauranteRepository.findById(id);
         if (restauranteAtual.isPresent())
             try {
-                BeanUtils.copyProperties(restaurante, restauranteAtual.get(), "id");
+                BeanUtils.copyProperties(restaurante, restauranteAtual.get(), "id","formasPagamento");
                 var restauranteSalvo = cadastroRestauranteService.save(restauranteAtual.get());
                 return ResponseEntity.ok(restauranteSalvo);
             } catch (EntityNotFoundException e) {

@@ -11,14 +11,17 @@ Content-Type: application/json
   }
 }
 
-### getByID
-GET http://localhost:8080/restaurantes/1
-Accept: application/json
+### Update
+PUT http://localhost:8080/restaurantes/1
+Content-Type: application/json
 
-
-### getAll
-GET http://localhost:8080/restaurantes
-Accept: application/json
+{
+  "nome": "Nandinhos",
+  "taxaFrete": 8,
+  "cozinha": {
+    "id": 2
+  }
+}
 
 ### update single field
 PATCH http://localhost:8080/restaurantes/1
@@ -30,6 +33,17 @@ Content-Type: application/json
     "id": 2
   }
 }
+
+### getByID
+GET http://localhost:8080/restaurantes/1
+Accept: application/json
+
+
+### getAll
+GET http://localhost:8080/restaurantes
+Accept: application/json
+
+
 
 
 ### Cozinhas
