@@ -14,3 +14,5 @@ insert into forma_pagamento(descricao) values ('TPA'),('Transferencia'), ('CX Ex
 insert into permissao(nome,descricao) values ('Admin','Administracao');
 
 insert into restaurante_forma_pagamento(restaurante_id, forma_pagamento_id) VALUES (1,1),(1,2),(1,3),(2,3),(3,2),(3,3);
+
+insert into produto(id, ativo, descricao, preco, restaurante_id) VALUES (1,1,'Coca-Cola Nacional',150.0,1),(2,0,'Coca-Cola Importada',130.0,1),(3,1,'Nocal',150.0,2);

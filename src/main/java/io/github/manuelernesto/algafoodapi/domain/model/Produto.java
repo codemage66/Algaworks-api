@@ -1,5 +1,6 @@
 package io.github.manuelernesto.algafoodapi.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -25,6 +26,7 @@ public class Produto {
     @Column(nullable = false)
     private Boolean ativo;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "restaurante_id", nullable = false)
     private Restaurante restaurante;
