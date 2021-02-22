@@ -36,10 +36,12 @@ public class Restaurante {
     @Embedded
     private Endereco endereco;
 
+    @JsonIgnore
     @CreationTimestamp
     @Column(nullable = false)
     private LocalDateTime dataCadastro;
 
+    @JsonIgnore
     @UpdateTimestamp
     @Column(nullable = false)
     private LocalDateTime dataActualizacao;

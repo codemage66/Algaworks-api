@@ -22,7 +22,9 @@ public class RestauranteController {
     private final RestauranteRepository restauranteRepository;
     private final CadastroRestauranteService cadastroRestauranteService;
 
-    public RestauranteController(RestauranteRepository restauranteRepository, CadastroRestauranteService cadastroRestauranteService) {
+    public RestauranteController(RestauranteRepository restauranteRepository,
+                                 CadastroRestauranteService cadastroRestauranteService
+    ) {
         this.restauranteRepository = restauranteRepository;
         this.cadastroRestauranteService = cadastroRestauranteService;
     }
@@ -43,7 +45,9 @@ public class RestauranteController {
         var restauranteAtual = restauranteRepository.findById(id);
         if (restauranteAtual.isPresent())
             try {
-                BeanUtils.copyProperties(restaurante, restauranteAtual.get(), "id", "formasPagamento","endereco");
+                BeanUtils.copyProperties(restaurante, restauranteAtual.get(),
+                        "id", "formasPagamento", "endereco", "dataCadastro");
+
                 var restauranteSalvo = cadastroRestauranteService.save(restauranteAtual.get());
                 return ResponseEntity.ok(restauranteSalvo);
             } catch (EntityNotFoundException e) {
